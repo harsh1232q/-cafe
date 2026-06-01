@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="cart-page">
+    <!-- Navbar-->
+    <nav class="navbar">
+        <img src="Media/logo.png" class="logo" alt="BBHS Café Logo">
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="cafe.html">Café Analytics</a></li>
+            <li>
+                <a href="cart.html" class="cart-link active">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+                    <span id="cart-count">0</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+
+
+
+    <!-- section below the image texts to different steps for the buying-->
+    <main class="checkout-container">
+        <nav class="checkout-steps">
+            <a href="cart.html" class="step active">Cart</a>
+            <span class="step-divider">›</span>
+            <a href="checkout.html" class="step">Confirm Order</a>
+            <span class="step-divider">›</span>
+            <a href="payment.html" class="step">Payment</a>
+        </nav>
+
+
+
+
+
+    <!-- Category for the cart-->
+        <div class="cart-content-wrapper">
+            <div class="cart-main">
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Item Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total price</th>
+                            <th>Remove</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-items-body">
+                        </tbody>
+                </table>
+            </div>
+
+
+
+
+
+    <!-- Order sumamry cart-->
+            <aside class="cart-summary">
+                <h3>Order Summary</h3>
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="summary-subtotal">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>GST (10%)</span>
+                    <span id="gst-amount">$1.30</span>
+                </div>
+                <div class="summary-total">
+                    <span>Total Amount</span>
+                    <span id="grand-total">$0.00</span>
+                </div>
+                <button class="checkout-btn" onclick="goToShipping()">Continue to Confirm Order</button>
+                <a href="menu.html" class="continue-shopping">← Back to Menu</a>
+            </aside>
+        </div>
+    </main>
+
+
+
+
+
+    <!-- JS for the cart-->
+    <script src="JS/cart.js"></script>
+</body>
+</html>

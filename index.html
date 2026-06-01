@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="banner">
+
+    <!-- Video Background section-->
+    <div class="video-container">
+        <video class="bgVideo active" autoplay muted></video>
+        <video class="bgVideo" autoplay muted></video>
+    </div>
+
+    <!-- Navbar section on the top-->
+    <div class="navbar">
+        <img src="Media/logo.png" class="logo" alt="Logo">
+
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="cafe.html">Café Analytics</a></li>
+            <li><a href="cart.html">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+            </a></li>
+        </ul>
+    </div>
+
+    <!-- Information section in the homepage -->
+    <div class="content">
+        <h1 class="title">Made Fresh for Every Student</h1> <br>
+
+        <br> <br> <br> <br> <br> <br> <br> <br> <br> <br> <br>
+
+        <button class="button" onclick="window.location.href='menu.html'">
+            <strong>Explore Menu</strong>
+            <span></span>
+        </button>
+    </div>
+
+    <!-- Animated video change section -->
+    <script>
+    const videos = [
+        "Media/index11.mp4",
+        "Media/index22.mp4",
+        "Media/index33.mp4"
+    ];
+
+    const videoEls = document.querySelectorAll(".bgVideo");
+
+    let index = 0;
+    let active = 0;
+
+    function changeVideo() {
+        const next = (active + 1) % 2;
+
+        videoEls[next].src = videos[index];
+        videoEls[next].load();
+        videoEls[next].play();
+
+        videoEls[next].classList.add("active");
+        videoEls[active].classList.remove("active");
+
+        active = next;
+        index = (index + 1) % videos.length;
+    }
+
+    changeVideo();
+    setInterval(changeVideo, 4000);
+    </script>
+
+</div>
+
+</body>
+</html>

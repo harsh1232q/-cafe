@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+
+    <link rel="stylesheet" href="CSS/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="cart-page">
+
+    <!-- TY payment DISPLAY SECTION-->
+    <div id="paymentSuccessOverlay" class="success-overlay">
+        <div class="success-card">
+            <div class="checkmark-circle">✅</div>
+
+            <h2>Order Placed, Thank you!</h2>
+
+            <p id="confirmationEmailText">
+                Confirmation will be sent to your email.
+            </p>
+
+            <div id="submissionTimestamp" class="timestamp"></div>
+
+            <p class="redirect-note">
+                Redirecting to homepage in 5 seconds...
+            </p>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <img src="Media/logo.png" class="logo" alt="BBHS Café Logo">
+
+        <ul>
+
+            <li>
+                <a href="index.html">Home</a>
+            </li>
+
+            <li>
+                <a href="menu.html">Menu</a>
+            </li>
+
+            <li>
+                <a href="about.html">About</a>
+            </li>
+
+            <li>
+                <a href="cafe.html">Café Analytics</a>
+            </li>
+
+            <li>
+                <a href="cart.html" class="cart-link">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         width="22"
+                         height="22"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="currentColor"
+                         stroke-width="2"
+                         stroke-linecap="round"
+                         stroke-linejoin="round">
+
+                        <circle cx="9" cy="21" r="1"></circle>
+                        <circle cx="20" cy="21" r="1"></circle>
+
+                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    </svg>
+
+                    <span id="cart-count">0</span>
+
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+    <!-- checkout steps -->
+    <main class="checkout-container">
+
+        <nav class="checkout-steps">
+
+            <a href="cart.html" class="step">Cart</a>
+
+            <span class="step-divider">›</span>
+
+            <a href="checkout.html" class="step">
+                Confirm Order
+            </a>
+
+            <span class="step-divider">›</span>
+
+            <span class="step active">Payment</span>
+
+        </nav>
+
+        <div class="cart-content-wrapper">
+
+            <!-- Payment form -->
+            <div class="cart-main card-only-container">
+
+                <form id="finalPaymentForm">
+
+                    <h2 class="section-title">
+                        Card Information
+                    </h2>
+
+                    <p class="section-subtitle">
+                        Enter payment details to complete your cafe order
+                    </p>
+
+                    <!-- LIVE CARD PREVIEW -->
+                    <div class="card-preview-strip">
+
+                        <div class="card-chip"></div>
+
+                        <div class="card-num-display" id="prev-num">
+                            •••• •••• •••• ••••
+                        </div>
+
+                        <div class="card-preview-bottom">
+
+                            <span id="prev-name">
+                                FULL NAME
+                            </span>
+
+                            <span id="prev-exp">
+                                MM/YY
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Accepted cards -->
+                    <div class="card-header-row">
+
+                        <span style="font-size:12px;color:#aaa;">
+                            Accepted cards
+                        </span>
+
+                        <div class="card-logos">
+
+                            <span class="visa-badge">
+                                VISA
+                            </span>
+
+                            <div class="mc-badge">
+                                <span></span>
+                                <span></span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="card-visual-box">
+
+                        <!-- Card number -->
+                        <div class="form-group full-width">
+
+                            <label>Card number</label>
+
+                            <input type="text"
+                                   placeholder="0000 0000 0000 0000"
+                                   maxlength="19"
+                                   required
+                                   class="black-text-input"
+
+                                   oninput="
+                                   this.value=this.value
+                                   .replace(/\D/g,'')
+                                   .replace(/(.{4})/g,'$1 ')
+                                   .trim();
+
+                                   document.getElementById('prev-num').textContent=
+                                   this.value || '•••• •••• •••• ••••'
+                                   ">
+
+                        </div>
+
+                        <!-- Name -->
+                        <div class="form-group full-width">
+
+                            <label>Name on card</label>
+
+                            <input type="text"
+                                   placeholder="John Smith"
+                                   required
+                                   class="black-text-input"
+
+                                   oninput="
+                                   document.getElementById('prev-name').textContent=
+                                   this.value.toUpperCase() || 'FULL NAME'
+                                   ">
+
+                        </div>
+
+                        <!-- expiry + cvv -->
+                        <div class="form-row-split">
+
+                            <!-- Expiry -->
+                            <div class="form-group">
+
+                                <label>Expiry date</label>
+
+                                <input type="month"
+                                       required
+                                       class="black-text-input"
+
+                                       oninput="
+                                       const v=this.value;
+
+                                       if(v){
+                                           const p=v.split('-');
+
+                                           document.getElementById('prev-exp').textContent=
+                                           p[1] + '/' + p[0].slice(2);
+                                       }
+                                       ">
+
+                            </div>
+
+                            <!-- CVV -->
+                            <div class="form-group">
+
+                                <label>CVV</label>
+
+                                <input type="password"
+                                       placeholder="•••"
+                                       maxlength="4"
+                                       required
+                                       class="black-text-input">
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+            <!-- ORDER SUMMARY -->
+            <aside class="cart-summary">
+
+                <h3>Order Summary</h3>
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span id="summary-subtotal">$0.00</span>
+                </div>
+
+                <div class="summary-row">
+                    <span>GST (10%)</span>
+                    <span id="gst-amount">$0.00</span>
+                </div>
+
+                <div class="summary-total">
+                    <span>Total Amount</span>
+                    <span id="grand-total">$0.00</span>
+                </div>
+
+                <!-- Email -->
+                <div class="payment-email-group">
+
+                    <label style="font-size:12px;font-weight:600;">
+                        Email for Receipt
+                    </label>
+
+                    <input type="email"
+                           id="pay-email"
+                           placeholder="student@example.com"
+                           required
+                           class="black-text-input"
+
+                           style="
+                           width:100%;
+                           padding:10px;
+                           margin-top:5px;
+                           ">
+
+                </div>
+
+                <!-- Terms -->
+                <div class="terms-box">
+
+                    <label class="checkbox-container">
+
+                        <input type="checkbox"
+                               id="agreeTerms"
+                               required>
+
+                        I confirm this cafe order and agree to payment.
+
+                    </label>
+
+                </div>
+
+                <!-- Pay button -->
+                <button type="submit"
+                        form="finalPaymentForm"
+                        class="button payment-trigger">
+
+                    <strong>Pay Now</strong>
+
+                </button>
+
+                <!-- Secure note -->
+                <p class="secure-note">
+
+                    <svg width="12"
+                         height="12"
+                         viewBox="0 0 24 24"
+                         fill="none"
+                         stroke="#bbb"
+                         stroke-width="2">
+
+                        <rect x="3"
+                              y="11"
+                              width="18"
+                              height="11"
+                              rx="2"/>
+
+                        <path d="M7 11V7a5 5 0 0110 0v4"/>
+
+                    </svg>
+
+                    Secured with 256-bit SSL encryption
+
+                </p>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+    <script src="JS/payment.js"></script>
+
+</body>
+</html>

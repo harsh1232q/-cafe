@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Analytics</title>
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <img src="Media/logo.png" class="logo" alt="Café Logo">
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="cafe.html" class="active">Café Analytics</a></li>
+        <li>
+            <a href="cart.html" class="cart-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="9" cy="21" r="1"></circle>
+                    <circle cx="20" cy="21" r="1"></circle>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+<!-- Header -->
+<div class="cafe-wrapper">
+    <header class="headerc">
+        <h1>Café Data Journalism <span class="neon">Dashboard</span></h1>
+        <p>Real-time insights into student orders, popular items, and peak café activity.</p>
+    </header>
+
+    <!-- Stat Cards -->
+    <section class="grid">
+        <div class="card1">
+            <div class="card1-top">
+                <div class="card1-icon" style="background:#e8f0fe;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4285f4" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                </div>
+            </div>
+            <h2>65</h2>
+            <p>Total Orders · this week</p>
+        </div>
+
+        <div class="card1">
+            <div class="card1-top">
+                <div class="card1-icon" style="background:#e6f4ea;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#34a853" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+                </div>
+            </div>
+            <h2>$4,241</h2>
+            <p>Total Revenue</p>
+        </div>
+
+        <div class="card1">
+            <div class="card1-top">
+                <div class="card1-icon" style="background:#f3e8fd;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9c27b0" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+                </div>
+            </div>
+            <h2>$3.44</h2>
+            <p>Avg Order Value · trend</p>
+        </div>
+    </section>
+
+    <!-- Charts Row -->
+    <section class="charts-row">
+        <div class="chart-card">
+            <h3>Most Popular Category</h3>
+            <div class="pie-wrapper">
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <h3>Most Popular Items</h3>
+            <div class="bar-wrapper">
+                <canvas id="barChart"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Journalism Box -->
+    <section class="section box">
+        <div class="box-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div>
+            <h2>What is Data Journalism?</h2>
+            <p>This page uses café order data to visually show trends in student and teacher purchasing behaviour. By analysing popular items, peak times, and revenue, the café can improve stock levels, reduce waste, and optimise service speed during busy periods.</p>
+        </div>
+    </section>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>© 2026 BBHS Café — Made Fresh for Every Student</p>
+</footer>
+
+<script>
+// Pie Chart
+const pieCtx = document.getElementById('pieChart').getContext('2d');
+new Chart(pieCtx, {
+    type: 'pie',
+    data: {
+        labels: ['Hot Drinks 42%', 'Extras 10%', 'Cold Drinks 20%', 'Breakfast 28%'],
+        datasets: [{
+            data: [42, 10, 20, 28],
+            backgroundColor: ['#00bcd4', '#e91e8c', '#9c27b0', '#3f51b5'],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: { font: { family: 'Inter', size: 12 }, padding: 16 }
+            }
+        }
+    }
+});
+
+// Bar Chart
+const barCtx = document.getElementById('barChart').getContext('2d');
+new Chart(barCtx, {
+    type: 'bar',
+    data: {
+        labels: ['Hot Chocolate', 'Toastie', 'Cappuccino', 'Milkshake', 'Mocha'],
+        datasets: [{
+            data: [200, 180, 155, 130, 105],
+            backgroundColor: '#00bcd4',
+            borderRadius: 6,
+            borderSkipped: false
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: { color: 'rgba(0,0,0,0.05)' },
+                ticks: { font: { family: 'Inter' } }
+            },
+            x: {
+                grid: { display: false },
+                ticks: { font: { family: 'Inter' } }
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>
